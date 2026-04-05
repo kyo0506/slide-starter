@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>teco 事業概要</title>
+<link rel="stylesheet" href="../../engine/slide.css">
+<link rel="stylesheet" href="../../theme/sample.css">
+<style>
+  .kpi-formula {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent2) 100%);
+    padding: 16px 32px;
+    border-radius: var(--radius);
+    text-align: center;
+    letter-spacing: .03em;
+    font-weight: var(--font-weight-bold);
+    box-shadow: 0 2px 8px rgba(30,64,175,.2);
+  }
+  .card h3 { color: var(--color-accent); font-size: 1.2rem; }
+  .insight {
+    background: var(--color-surface);
+    border-left: 4px solid var(--color-accent2);
+    padding: 16px 28px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: var(--font-size-body);
+    text-align: left;
+    max-width: 760px;
+    color: var(--color-dark);
+  }
+  .lead-text { font-size: 2.0rem; max-width: 860px; line-height: 1.7; }
+
+  /* PL table */
+  .pl-wrap { width: 100%; max-width: 900px; }
+  .pl-table { width: 100%; border-collapse: collapse; font-size: 1.05rem; }
+  .pl-table th, .pl-table td { padding: 11px 20px; text-align: left; border-bottom: 1px solid var(--color-border); }
+  .pl-table th { color: #ffffff; background: var(--color-accent); font-size: var(--font-size-small); font-weight: var(--font-weight-bold); }
+  .pl-table td:last-child { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .pl-table tr:nth-child(even) { background: var(--color-surface); }
+  .pl-table tr.total td { font-weight: var(--font-weight-bold); color: var(--color-accent); background: var(--color-accent-soft); border-top: 2px solid var(--color-accent); }
+  .pl-table tr.subtotal td { font-weight: var(--font-weight-bold); }
+  .pl-table tr.indent td:first-child { padding-left: 36px; color: var(--color-muted); }
+
+  /* Waterfall */
+  .waterfall { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 900px; }
+  .wf-row { display: flex; align-items: center; gap: 14px; }
+  .wf-label { width: 120px; font-size: var(--font-size-small); text-align: right; flex-shrink: 0; color: var(--color-muted); font-weight: var(--font-weight-bold); }
+  .wf-bar-wrap { flex: 1; height: 36px; background: var(--color-surface); border-radius: var(--radius-sm); overflow: hidden; }
+  .wf-bar {
+    height: 100%; border-radius: var(--radius-sm);
+    display: flex; align-items: center; padding: 0 14px;
+    font-family: var(--font-mono); font-size: .85rem; color: #fff;
+    font-weight: var(--font-weight-bold);
+  }
+  .wf-val { width: 85px; font-family: var(--font-mono); font-size: var(--font-size-small); text-align: right; flex-shrink: 0; font-weight: var(--font-weight-bold); }
+  .wf-bar.revenue { background: linear-gradient(90deg, var(--color-accent), var(--color-accent2)); }
+  .wf-bar.cost    { background: #ef4444; }
+  .wf-bar.gross   { background: #10b981; }
+  .wf-bar.sg      { background: #f59e0b; }
+  .wf-bar.profit  { background: linear-gradient(90deg, #7c3aed, #8b5cf6); }
+
+  /* Cost bars */
+  .cost-bars { width: 100%; max-width: 820px; display: flex; flex-direction: column; gap: 10px; }
+  .cost-bar-row { display: flex; align-items: center; gap: 14px; }
+  .cost-bar-label { width: 150px; font-size: var(--font-size-small); text-align: right; flex-shrink: 0; color: var(--color-muted); }
+  .cost-bar-track { flex: 1; height: 30px; background: var(--color-surface); border-radius: var(--radius-sm); overflow: hidden; }
+  .cost-bar-fill { height: 100%; border-radius: var(--radius-sm); display: flex; align-items: center; padding: 0 12px; font-family: var(--font-mono); font-size: .8rem; color: #fff; font-weight: var(--font-weight-bold); }
+  .cost-bar-val { width: 75px; font-family: var(--font-mono); font-size: var(--font-size-small); text-align: right; flex-shrink: 0; font-weight: var(--font-weight-bold); }
+
+  .sim-number {
+    font-family: var(--font-mono); font-size: 1.6rem;
+    color: var(--color-accent); font-weight: var(--font-weight-bold);
+    margin-top: 6px;
+  }
+
+  /* Accent top border on slide */
+  .slide-content { border-top: 4px solid var(--color-accent2); }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- ========== 1. Title ========== -->
+  <section class="slide slide-title" style="background:linear-gradient(135deg,#1e293b 0%,#1e40af 100%);">
+    <h1 style="font-size:3.6rem;color:#ffffff;">teco類似サービスのご提案について</h1>
+  </section>
+
+  <!-- ========== 2. tecoとは何か ========== -->
+  <section class="slide slide-content">
+    <h2>tecoとは何か</h2>
+    <div class="body">
+      <p class="lead-text"><span class="bold">キャバ嬢並みに可愛い子と駆け引きなしにみんなで楽しくお酒を飲みながらゲームができる</span>、<br><span class="accent">非日常型のエンタメサービス</span>。</p>
+      <div class="cols-4" style="max-width:840px;">
+        <div class="stat">
+          <span class="number" style="font-size:2rem;">5</span>
+          <span class="label">展開エリア<br>東京・大阪・名古屋<br>神奈川・福岡</span>
+        </div>
+        <div class="stat">
+          <span class="number" style="font-size:2rem;">1:1〜</span>
+          <span class="label">利用形態<br>団体利用まで対応</span>
+        </div>
+        <div class="stat">
+          <span class="number" style="font-size:2rem;">30分</span>
+          <span class="label">最短合流<br>アプリで即マッチ</span>
+        </div>
+        <div class="stat">
+          <span class="number" style="font-size:2rem;">7.5万</span>
+          <span class="label">返金対応<br>クレカ決済も可能</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 3. ビジネスモデルの全体像 ========== -->
+  <section class="slide slide-content">
+    <h2>ビジネスモデルの全体像</h2>
+    <div class="body">
+      <p class="lead-text">収益構造はシンプルな<span class="bold">「キャスト仕入れ → 稼働 → 粗利」</span>モデル。</p>
+      <div class="flow">
+        <div class="flow-step">
+          <span class="tag">STEP 1</span>
+          <h3>キャスト獲得</h3>
+          <p class="accent bold" style="font-size:1.3rem;">5〜15万円<span class="muted" style="font-size:.9rem;font-weight:400;">/人</span></p>
+          <p class="muted" style="font-size:.9rem;">求人広告・DMスカウト・紹介</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="tag">STEP 2</span>
+          <h3>稼働</h3>
+          <p class="accent bold" style="font-size:1.3rem;">7.5万円<span class="muted" style="font-size:.9rem;font-weight:400;">/回</span></p>
+          <p class="muted" style="font-size:.9rem;">月200回 → 売上1,500万</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="tag">STEP 3</span>
+          <h3>粗利</h3>
+          <p class="accent bold" style="font-size:1.3rem;">675万円<span class="muted" style="font-size:.9rem;font-weight:400;">/月</span></p>
+          <p class="muted" style="font-size:.9rem;">粗利率 45%</p>
+        </div>
+      </div>
+      <div class="insight">獲得コストを早期に回収し、その後の稼働分が純粋な利益になる<span class="bold">ストック型に近い構造</span></div>
+    </div>
+  </section>
+
+  <!-- ========== 4. センターピン ========== -->
+  <section class="slide slide-content">
+    <h2>事業のセンターピン — KPI構造</h2>
+    <div class="body">
+      <div class="kpi-formula">売上 1,500万 = 30人 × 50% × 13.3回 × ¥75,000</div>
+      <div class="cols-4" style="max-width:840px;">
+        <div class="stat">
+          <span class="number">30人</span>
+          <span class="label">キャスト数<br>登録キャスト総数</span>
+        </div>
+        <div class="stat">
+          <span class="number">50%</span>
+          <span class="label">出勤率<br>アクティブ15人</span>
+        </div>
+        <div class="stat">
+          <span class="number">13.3回</span>
+          <span class="label">月間稼働/人<br>マッチング効率</span>
+        </div>
+        <div class="stat">
+          <span class="number">¥75,000</span>
+          <span class="label">平均単価<br>60分あたり</span>
+        </div>
+      </div>
+      <div class="insight">4変数のうち<span class="bold">どれか1つでも低いと売上は大きく落ちる</span>ため、全体を底上げする運用設計が必要</div>
+    </div>
+  </section>
+
+  <!-- ========== 5. 月次PL ========== -->
+  <section class="slide slide-content">
+    <h2>月次PL — 売上1,500万円時</h2>
+    <div class="body">
+      <div class="pl-wrap">
+        <table class="pl-table">
+          <tr><th>項目</th><th>金額</th></tr>
+          <tr class="subtotal"><td>売上高</td><td>1,500万円</td></tr>
+          <tr class="indent"><td>キャスト報酬（55%）</td><td>▲ 825万円</td></tr>
+          <tr class="subtotal"><td>粗利益（粗利率 45%）</td><td>675万円</td></tr>
+          <tr class="indent"><td>キャスト獲得費（CAC） 5人×10万</td><td>▲ 50万円</td></tr>
+          <tr class="indent"><td>人件費（運営・CS）</td><td>▲ 60万円</td></tr>
+          <tr class="indent"><td>広告宣伝費</td><td>▲ 20万円</td></tr>
+          <tr class="indent"><td>アプリ開発・保守</td><td>▲ 20万円</td></tr>
+          <tr class="indent"><td>その他（通信・拠点等）</td><td>▲ 15万円</td></tr>
+          <tr class="subtotal"><td>販管費 合計</td><td>▲ 165万円</td></tr>
+          <tr class="total"><td>営業利益（利益率 34%）</td><td>510万円</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 8. 成長レバー ========== -->
+  <section class="slide slide-content">
+    <h2>成長レバーと事業拡大の方向性</h2>
+    <div class="body">
+      <div class="cols-3" style="max-width:880px;">
+        <div class="card">
+          <span class="tag">LEVER 01</span>
+          <h3>キャスト数の拡大</h3>
+          <p style="font-size:1rem;">獲得チャネルの多角化と紹介制度の強化で、エリアあたりのキャスト密度を上げる。</p>
+          <p class="sim-number">→ 2,500万円</p>
+          <p class="muted" style="font-size:.85rem;">30人 → 50人時</p>
+        </div>
+        <div class="card">
+          <span class="tag">LEVER 02</span>
+          <h3>出勤率・稼働率の改善</h3>
+          <p style="font-size:1rem;">シフト管理の最適化、インセンティブ設計、需要予測によるマッチング精度の向上。</p>
+          <p class="sim-number">→ 1,950万円</p>
+          <p class="muted" style="font-size:.85rem;">出勤率 50% → 65%時</p>
+        </div>
+        <div class="card">
+          <span class="tag">LEVER 03</span>
+          <h3>エリア拡大と単価UP</h3>
+          <p style="font-size:1rem;">新規エリアへの展開と、VIP向けプランや長時間プランによる客単価アップ。</p>
+          <p class="sim-number">→ 1,800万円</p>
+          <p class="muted" style="font-size:.85rem;">単価 7.5万 → 9万時</p>
+        </div>
+      </div>
+      <div class="insight">この<span class="bold">3方向を同時に回す</span>ことで、センターピンの4変数すべてを押し上げる</div>
+    </div>
+  </section>
+
+  <!-- ========== Appendix 扉 ========== -->
+  <section class="slide slide-section" style="background:linear-gradient(135deg,#1e293b 0%,#1e40af 100%);">
+    <span class="section-num">APPENDIX</span>
+    <h2 style="color:#fff;">補足資料</h2>
+  </section>
+
+  <!-- ========== Appendix: 代案サービス ========== -->
+  <section class="slide slide-content">
+    <h2>伸びそうな代案サービス</h2>
+    <div class="body">
+      <ul class="list" style="text-align:left;max-width:820px;gap:18px;">
+        <li>ターゲットは<span class="bold">年収1,000万円の中流層</span></li>
+        <li>狙う需要は<span class="accent bold">富裕層がやっていることをやりたい</span></li>
+        <li><span class="bold">芸能人（グラビアアイドルなど）</span>とえっちなゲームができる</li>
+        <li>tecoはキャバ嬢レベルの女の子とゲームができるが、類似サービスは<span class="bold">さらに女の子のグレードを上げて単価を上げる</span></li>
+        <li>誰でもキャストが閲覧できるのではなく、<span class="accent bold">会員限定でしか閲覧できないようにしてプレミアム感を出す</span></li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<!-- Navigation UI -->
+<div class="progress-bar"></div>
+<nav class="nav">
+  <button class="nav-prev" aria-label="前へ">←</button>
+  <span class="slide-counter">1 / 8</span>
+  <button class="nav-next" aria-label="次へ">→</button>
+  <button class="nav-fs" aria-label="フルスクリーン">⛶</button>
+  <button class="nav-pdf" aria-label="PDF">PDF</button>
+</nav>
+
+<script src="../../engine/slide.js"></script>
+</body>
+</html>

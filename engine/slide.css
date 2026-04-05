@@ -1,0 +1,83 @@
+/* ============================================
+   Engine — slide.css
+   16:9 lock, navigation UI, print/PDF output
+   DO NOT EDIT
+   ============================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%; overflow: hidden;
+  font-family: var(--font-body, "Helvetica Neue", Arial, sans-serif);
+  background: var(--color-bg, #0a0a0a);
+  color: var(--color-text, #e0e0e0);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- 16:9 Slide Container --- */
+.deck { position: relative; width: 100%; height: 100%; overflow: hidden; }
+
+.slide {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  aspect-ratio: 16 / 9;
+  padding: var(--slide-padding, 64px 80px);
+  display: flex; flex-direction: column; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .35s ease;
+}
+.slide.active { opacity: 1; pointer-events: auto; }
+
+/* --- Navigation UI --- */
+.nav {
+  position: fixed; bottom: 20px; right: 28px;
+  display: flex; align-items: center; gap: 12px;
+  z-index: 100; user-select: none;
+  opacity: 0; transition: opacity .3s;
+}
+body:hover .nav, .nav:focus-within { opacity: 1; }
+
+.nav button {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+  color: rgba(255,255,255,.6); border-radius: 6px;
+  width: 36px; height: 36px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; transition: background .2s, color .2s;
+}
+.nav button:hover { background: rgba(255,255,255,.14); color: #fff; }
+
+.slide-counter {
+  font-size: 13px; color: rgba(255,255,255,.35);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono, "SF Mono", monospace);
+  min-width: 44px; text-align: center;
+}
+
+/* --- Progress Bar --- */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px;
+  background: var(--color-accent, #3b82f6);
+  transition: width .3s ease; z-index: 100;
+}
+
+/* --- Print / PDF --- */
+@media print {
+  html, body { overflow: visible; background: white; }
+  .nav, .progress-bar { display: none !important; }
+  .deck { position: static; }
+  .slide {
+    position: relative; opacity: 1 !important; pointer-events: auto;
+    page-break-after: always; page-break-inside: avoid;
+    break-after: page; break-inside: avoid;
+    height: 100vh; width: 100vw;
+  }
+  .slide-bg-print { display: block !important; }
+  /* Normalize font weights for print */
+  * { font-weight: 400 !important; }
+  strong, b, .bold, h1, h2, h3 { font-weight: 600 !important; }
+  @page {
+    size: 254mm 142.875mm;
+    margin: 0;
+  }
+}
+.slide-bg-print { display: none; }

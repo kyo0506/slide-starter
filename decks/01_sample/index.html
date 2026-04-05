@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample Deck</title>
+<link rel="stylesheet" href="../../engine/slide.css">
+<link rel="stylesheet" href="../../theme/sample.css">
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- 1. Title -->
+  <section class="slide slide-title">
+    <h1>Sample Deck</h1>
+    <p class="subtitle">全スライドタイプ・図解パターンのショーケース</p>
+    <p class="meta">slide-starter テンプレート</p>
+  </section>
+
+  <!-- 2. Section -->
+  <section class="slide slide-section">
+    <span class="section-num">Section 01</span>
+    <h2>スライドタイプ</h2>
+  </section>
+
+  <!-- 3. Content — List -->
+  <section class="slide slide-content">
+    <h2>箇条書きリスト</h2>
+    <div class="body">
+      <ul class="list">
+        <li>slide-title — タイトルスライド</li>
+        <li>slide-content — 汎用コンテンツ</li>
+        <li>slide-section — セクション区切り</li>
+        <li>slide-landing — 核心の一文を大きく見せる</li>
+        <li>slide-end — エンディング</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. Landing -->
+  <section class="slide slide-landing">
+    <p>スライドは情報の<br>「視覚的な再配置」である。</p>
+    <p class="sub">ランディングスライドは核心の一文を大きく表示する</p>
+  </section>
+
+  <!-- 5. Section -->
+  <section class="slide slide-section">
+    <span class="section-num">Section 02</span>
+    <h2>図解パターン</h2>
+  </section>
+
+  <!-- 6. Flow Chart -->
+  <section class="slide slide-content">
+    <h2>フローチャート</h2>
+    <div class="body">
+      <div class="flow">
+        <div class="flow-step"><h3>Step 1</h3><p>インプット</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><h3>Step 2</h3><p>処理</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><h3>Step 3</h3><p>アウトプット</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Card Grid -->
+  <section class="slide slide-content">
+    <h2>カードグリッド（3カラム）</h2>
+    <div class="body">
+      <div class="cols-3">
+        <div class="card"><span class="tag">01</span><h3>タイトル</h3><p>カード内の説明テキスト。</p></div>
+        <div class="card"><span class="tag">02</span><h3>タイトル</h3><p>カード内の説明テキスト。</p></div>
+        <div class="card"><span class="tag">03</span><h3>タイトル</h3><p>カード内の説明テキスト。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Stats -->
+  <section class="slide slide-content">
+    <h2>数字ハイライト</h2>
+    <div class="body">
+      <div class="cols-3">
+        <div class="stat"><span class="number">42%</span><span class="label">コンバージョン率</span></div>
+        <div class="stat"><span class="number">1.2M</span><span class="label">月間アクティブユーザー</span></div>
+        <div class="stat"><span class="number">98%</span><span class="label">顧客満足度</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Two Columns -->
+  <section class="slide slide-content">
+    <h2>2カラム比較</h2>
+    <div class="body">
+      <div class="cols-2">
+        <div class="card"><h3>Before</h3><p>従来のアプローチ。手作業が多く時間がかかる。</p></div>
+        <div class="card"><h3>After</h3><p>新しいアプローチ。自動化により効率が大幅に改善。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. End -->
+  <section class="slide slide-end">
+    <h2>Thank You</h2>
+    <p class="contact">Sample Deck — slide-starter</p>
+  </section>
+
+</div>
+
+<!-- Navigation UI -->
+<div class="progress-bar"></div>
+<nav class="nav">
+  <button class="nav-prev" aria-label="前へ">←</button>
+  <span class="slide-counter">1 / 10</span>
+  <button class="nav-next" aria-label="次へ">→</button>
+  <button class="nav-fs" aria-label="フルスクリーン">⛶</button>
+  <button class="nav-pdf" aria-label="PDF">PDF</button>
+</nav>
+
+<script src="../../engine/slide.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+/* ============================================
+   Theme — sample.css — PowerPoint Style
+   ============================================ */
+
+:root {
+  /* Color — Corporate Light */
+  --color-bg:       #ffffff;
+  --color-surface:  #f0f2f5;
+  --color-text:     #222222;
+  --color-muted:    #6b7280;
+  --color-accent:   #1e40af;
+  --color-accent2:  #3b82f6;
+  --color-accent-soft: rgba(30,64,175,.07);
+  --color-border:   #e5e7eb;
+  --color-card-bg:  #ffffff;
+  --color-dark:     #1e293b;
+
+  /* Typography */
+  --font-body:  "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  --font-mono:  "SF Mono", "Fira Code", "Consolas", monospace;
+  --font-size-h1:  3rem;
+  --font-size-h2:  2.2rem;
+  --font-size-h3:  1.4rem;
+  --font-size-body: 1.2rem;
+  --font-size-small: .95rem;
+  --font-weight-normal: 400;
+  --font-weight-bold:   700;
+  --line-height: 1.65;
+
+  /* Spacing */
+  --slide-padding: 60px 80px;
+  --gap:  24px;
+  --gap-sm: 14px;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+/* --- Base Typography --- */
+h1 { font-size: var(--font-size-h1); font-weight: var(--font-weight-bold); line-height: 1.2; letter-spacing: -.02em; color: var(--color-dark); }
+h2 { font-size: var(--font-size-h2); font-weight: var(--font-weight-bold); line-height: 1.3; color: var(--color-dark); }
+h3 { font-size: var(--font-size-h3); font-weight: var(--font-weight-bold); line-height: 1.4; }
+p, li { font-size: var(--font-size-body); line-height: var(--line-height); }
+
+/* --- Slide Types --- */
+
+/* Title — dark gradient hero */
+.slide-title {
+  justify-content: center; align-items: center; text-align: center;
+  gap: 20px;
+  background: linear-gradient(135deg, #1e293b 0%, #1e40af 100%);
+  color: #ffffff;
+}
+.slide-title h1 { font-size: 3.2rem; color: #ffffff; }
+.slide-title .subtitle { font-size: 1.2rem; color: rgba(255,255,255,.7); font-weight: var(--font-weight-normal); }
+.slide-title .meta { font-size: var(--font-size-small); color: rgba(255,255,255,.5); margin-top: 4px; }
+
+/* Content */
+.slide-content {
+  align-items: center; text-align: center;
+  gap: var(--gap);
+  background: #ffffff;
+}
+.slide-content h2 {
+  text-align: center;
+  color: var(--color-accent);
+  position: relative;
+  padding-bottom: 12px;
+}
+.slide-content h2::after {
+  content: "";
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 48px; height: 3px; border-radius: 2px;
+  background: var(--color-accent2);
+}
+.slide-content .body {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--gap); flex: 1; width: 100%; max-width: 960px;
+}
+
+/* Section — accent banner */
+.slide-section {
+  justify-content: center; align-items: center; text-align: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: #ffffff;
+}
+.slide-section h2 { font-size: 2.6rem; color: #ffffff; }
+.slide-section h2::after { display: none; }
+.slide-section .section-num {
+  font-family: var(--font-mono); font-size: var(--font-size-small);
+  color: rgba(255,255,255,.6); letter-spacing: .14em; text-transform: uppercase;
+}
+
+/* Landing */
+.slide-landing {
+  justify-content: center; align-items: center; text-align: center; gap: 0;
+  padding: 60px 100px;
+  background: var(--color-surface);
+}
+.slide-landing p {
+  font-size: 2rem; line-height: 1.55; font-weight: var(--font-weight-bold); color: var(--color-dark);
+}
+.slide-landing .sub { font-size: 1.1rem; color: var(--color-muted); margin-top: 20px; font-weight: var(--font-weight-normal); }
+
+/* End */
+.slide-end {
+  justify-content: center; align-items: center; text-align: center; gap: 16px;
+  background: linear-gradient(135deg, #1e293b 0%, #1e40af 100%);
+  color: #ffffff;
+}
+.slide-end h2 { font-size: 2.8rem; color: #ffffff; }
+.slide-end .contact { font-size: var(--font-size-body); color: rgba(255,255,255,.6); }
+
+/* --- Utility Classes --- */
+.accent { color: var(--color-accent); }
+.muted  { color: var(--color-muted); }
+.mono   { font-family: var(--font-mono); }
+.bold   { font-weight: var(--font-weight-bold); }
+.divider { border: none; border-top: 1px solid var(--color-border); margin: var(--gap) 0; }
+
+/* Grid */
+.cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); width: 100%; }
+.cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--gap); width: 100%; }
+.cols-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: var(--gap); width: 100%; }
+
+/* List */
+.list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--gap-sm); text-align: left; }
+.list li { padding-left: 24px; position: relative; }
+.list li::before {
+  content: ""; position: absolute; left: 0; top: 11px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--color-accent2);
+}
+
+/* Card — elevated PowerPoint style */
+.card {
+  background: #ffffff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: var(--gap-sm);
+  box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.04);
+  transition: box-shadow .2s, transform .2s;
+}
+.card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.1); transform: translateY(-2px); }
+
+/* Flow */
+.flow { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; width: 100%; justify-content: center; }
+.flow-step {
+  flex: 1; min-width: 150px; max-width: 260px;
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.04);
+}
+.flow-arrow { font-size: 1.4rem; color: var(--color-accent2); flex-shrink: 0; font-weight: var(--font-weight-bold); }
+
+/* Stat — bold numbers in accent boxes */
+.stat {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 24px 16px;
+  background: #ffffff;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06), 0 0 0 1px rgba(0,0,0,.04);
+  border-top: 3px solid var(--color-accent2);
+}
+.stat .number {
+  font-size: 2.2rem; font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+}
+.stat .label { font-size: var(--font-size-small); color: var(--color-muted); text-align: center; line-height: 1.5; }
+
+/* Tag — pill badge */
+.tag {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: .75rem;
+  background: var(--color-accent); color: #ffffff;
+  padding: 4px 14px; border-radius: 20px;
+  letter-spacing: .06em; font-weight: var(--font-weight-bold);
+}
+
+/* Logo */
+.slide-logo {
+  position: absolute; top: 24px; right: 32px;
+  height: 24px; opacity: .5;
+}
+
+/* Image */
+.img-box {
+  border-radius: var(--radius); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  flex: 1; min-height: 0;
+}
+.img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Text + Image */
+.text-img { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); align-items: center; flex: 1; }
+.text-img .text { display: flex; flex-direction: column; gap: var(--gap-sm); }
+
+/* --- Light Nav override --- */
+.nav button {
+  background: rgba(0,0,0,.05); border-color: rgba(0,0,0,.1);
+  color: rgba(0,0,0,.45); border-radius: 8px;
+}
+.nav button:hover { background: rgba(0,0,0,.1); color: var(--color-text); }
+.slide-counter { color: rgba(0,0,0,.3); }
