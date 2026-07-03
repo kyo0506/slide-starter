@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漫画制作サービスのご案内</title>
+<link rel="stylesheet" href="../../engine/slide.css">
+<!-- theme/sample.css 除外: このデッキ専用のダークテーマを使用 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =============================================
+     pivot-claude-code 完全再現テーマ
+     ============================================= */
+
+  /* --- Tokens (参考サイト準拠) --- */
+  :root {
+    --color-bg-dark: #FFFFFF;
+    --color-bg-light: #FFFFFF;
+    --color-text-white: #FFFFFF;
+    --color-text-dark: #0D1418;
+    --color-text-secondary: #1A1A1A;
+    --color-text-tertiary: #333333;
+    --color-text-on-dark-secondary: rgba(255,255,255,0.7);
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #EDEDED;
+    --color-surface-dark: #1A1A1A;
+    --color-border: #333333;
+    --color-border-light: #555555;
+    --color-divider: #333333;
+    --color-accent: #4407F5;
+    --color-accent-strong: #3005C4;
+    --color-accent-light: rgba(68,7,245,0.10);
+    --color-accent-sub: #C607DA;
+
+    --gradient-warm: #FFFFFF;
+    --gradient-cool: #FFFFFF;
+    --gradient-blend: #FFFFFF;
+    --gradient-dark: #FFFFFF;
+
+    --font-heading: 'Poppins', 'Noto Sans JP', sans-serif;
+    --font-body: 'Noto Sans JP', 'Poppins', sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+
+    --font-size-hero: clamp(3.5rem, 6.25vw, 4.75rem);
+    --font-size-h1: clamp(2.75rem, 4.75vw, 3.75rem);
+    --font-size-h2: clamp(2.25rem, 3.75vw, 2.875rem);
+    --font-size-description: clamp(1.5rem, 2.5vw, 1.875rem);
+    --font-size-body: clamp(1.44rem, 2.125vw, 1.75rem);
+    --font-size-caption: clamp(1.125rem, 1.5vw, 1.3rem);
+    --font-size-kpi: clamp(4rem, 7.5vw, 6.25rem);
+
+    --slide-padding: 75px;
+    --slide-padding-bottom: 125px;
+    --content-gap: 30px;
+    --card-gap: 30px;
+    --card-radius: 5px;
+    --card-padding: 30px;
+  }
+
+  /* --- Noise Texture (全スライド共通) --- */
+  .slide::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .slide > * { position: relative; z-index: 2; }
+
+  /* --- Base Reset --- */
+  .slide {
+    font-family: var(--font-body);
+    padding: var(--slide-padding);
+    padding-bottom: var(--slide-padding-bottom);
+  }
+  h1, h2, h3 { font-family: var(--font-heading); }
+
+  /* --- Page Number --- */
+  .page-num {
+    position: absolute; bottom: 30px; right: 40px;
+    font-family: var(--font-heading); font-size: 13px;
+    opacity: 0.5; z-index: 3;
+  }
+
+  /* =========================================
+     Slide Backgrounds
+     ========================================= */
+  .bg-warm  { background: #FFFFFF !important; }
+  .bg-cool  { background: #FFFFFF !important; }
+  .bg-blend { background: #FFFFFF !important; }
+  .bg-dark  { background: #FFFFFF !important; }
+  .bg-light { background: #FFFFFF !important; }
+
+  /* =========================================
+     Cover Slide (タイトル)
+     参考: slide 1 — warm gradient, 左下寄せ
+     ========================================= */
+  .slide-title {
+    justify-content: flex-end;
+    align-items: flex-start;
+    text-align: left;
+    gap: 16px;
+    background: var(--gradient-warm);
+    color: var(--color-text-dark);
+  }
+  .slide-title h1 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-hero);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text-dark);
+    letter-spacing: -.02em;
+  }
+  .slide-title .subtitle {
+    font-family: var(--font-body);
+    font-size: var(--font-size-description);
+    color: var(--color-text-tertiary);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .slide-title .meta {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-caption);
+    color: rgba(0,0,0,0.4);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  /* =========================================
+     Section Divider (セクション区切り)
+     参考: slide 12,14,20,27 — warm gradient, 中央
+     ========================================= */
+  .slide-section {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    background: var(--gradient-warm);
+    color: var(--color-text-dark);
+  }
+  .slide-section h2 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h1);
+    font-weight: 700;
+    color: var(--color-text-dark);
+    line-height: 1.2;
+  }
+  .slide-section h2::after { display: none; }
+  .slide-section .section-num {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-caption);
+    color: rgba(0,0,0,0.5);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .slide-section .section-sub {
+    font-family: var(--font-body);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-tertiary);
+    font-weight: 400;
+  }
+
+  /* =========================================
+     Statement / Landing (一文スライド)
+     参考: slide 3,5,10,23,39 — dark bg, 大きな中央テキスト
+     ========================================= */
+  .slide-landing {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+    padding: var(--slide-padding) 100px var(--slide-padding-bottom);
+    background: var(--color-bg-dark);
+  }
+  .slide-landing p {
+    font-family: var(--font-body);
+    font-size: var(--font-size-h2);
+    line-height: 1.6;
+    font-weight: 700;
+    color: var(--color-text-dark);
+  }
+  .slide-landing .sub {
+    font-family: var(--font-body);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-tertiary);
+    margin-top: 24px;
+    font-weight: 400;
+    line-height: var(--line-height-caption);
+  }
+  .slide-landing .accent-text {
+    color: var(--color-accent);
+  }
+
+  /* =========================================
+     Content — Dark (メインコンテンツ dark)
+     参考: slide 4,7,8,9 etc — #000 背景
+     ========================================= */
+  .slide-content {
+    align-items: flex-start;
+    text-align: left;
+    gap: var(--content-gap);
+    background: var(--color-bg-dark);
+    color: var(--color-text-dark);
+    border-top: none;
+  }
+  .slide-content h2 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h2);
+    font-weight: 700;
+    color: var(--color-text-dark);
+    line-height: 1.3;
+    letter-spacing: -.01em;
+    text-align: left;
+    padding-bottom: 0;
+  }
+  .slide-content h2::after { display: none; }
+  .slide-content .desc {
+    font-family: var(--font-body);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-tertiary);
+    line-height: 1.8;
+  }
+  .slide-content .body {
+    display: flex; flex-direction: column;
+    gap: var(--content-gap);
+    flex: 1; width: 100%;
+    align-items: flex-start;
+  }
+
+  /* =========================================
+     Content — Light (メインコンテンツ light)
+     参考: slide 13,17,18 — #F9F9F9 背景
+     ========================================= */
+  .slide-content.light {
+    background: var(--color-bg-light) !important;
+    color: var(--color-text-dark);
+  }
+  .slide-content.light h2 { color: var(--color-text-dark); }
+  .slide-content.light .desc { color: var(--color-text-tertiary); }
+  .slide-content.light p { color: var(--color-text-secondary); }
+  .slide-content.light h3 { color: var(--color-text-dark); }
+  .slide-content.light .page-num { color: var(--color-text-dark); }
+
+  /* =========================================
+     End Slide
+     参考: slide 42 — warm gradient, "Thank You."
+     ========================================= */
+  .slide-end {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    background: var(--gradient-warm);
+    color: var(--color-text-dark);
+  }
+  .slide-end h2 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-hero);
+    font-weight: 700;
+    color: var(--color-text-dark);
+  }
+  .slide-end .contact {
+    font-family: var(--font-body);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-tertiary);
+  }
+
+  /* =========================================
+     Components
+     ========================================= */
+
+  /* --- Label (タグ的ラベル) --- */
+  .label {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+  }
+  .light .label { color: var(--color-accent); }
+
+  /* --- Card (dark) — glassmorphism --- */
+  .card {
+    background: var(--color-surface);
+    border: 1px solid #e0e0e0;
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    display: flex; flex-direction: column;
+    gap: 12px;
+    box-shadow: none;
+    text-align: left;
+  }
+  .card:hover { transform: none; box-shadow: none; background: #f5f5f5; }
+  .card h3 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-caption);
+    font-weight: 600;
+    color: var(--color-text-dark);
+  }
+  .card p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-tertiary);
+    line-height: 1.7;
+  }
+  .card .card-accent {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 16px;
+  }
+
+  /* --- Card (light) --- */
+  .light .card {
+    background: var(--color-surface);
+    border: 1px solid #e0e0e0;
+  }
+  .light .card h3 { color: var(--color-text-dark); }
+  .light .card p { color: var(--color-text-tertiary); }
+
+  /* --- Card with accent top --- */
+  .card-accent-top { border-top: 3px solid var(--color-accent); }
+
+  /* --- Grid --- */
+  .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--card-gap); width: 100%; }
+  .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--card-gap); width: 100%; }
+  .cols-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: var(--card-gap); width: 100%; }
+
+  /* --- Tag/Badge --- */
+  .tag {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--color-accent);
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 3px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  /* --- Flow (制作フロー) --- */
+  .flow {
+    display: flex; align-items: stretch;
+    gap: 8px; width: 100%; justify-content: flex-start;
+  }
+  .flow-step {
+    flex: 1;
+    background: var(--color-surface);
+    border: 1px solid #e0e0e0;
+    border-radius: var(--card-radius);
+    padding: 24px 16px;
+    display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
+    box-shadow: none;
+  }
+  .flow-step h3 { color: var(--color-text-dark); font-size: 14px; font-weight: 600; font-family: var(--font-heading); }
+  .flow-step p { color: var(--color-text-tertiary); font-size: 12px; line-height: 1.5; }
+  .flow-arrow {
+    font-size: 18px;
+    color: #ccc;
+    display: flex; align-items: center;
+    flex-shrink: 0;
+  }
+
+  .light .flow-step {
+    background: var(--color-surface);
+    border: 1px solid #e0e0e0;
+  }
+  .light .flow-step h3 { color: var(--color-text-dark); }
+  .light .flow-step p { color: var(--color-text-tertiary); }
+  .light .flow-arrow { color: #ccc; }
+
+  /* --- Stat / KPI --- */
+  .stat {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+    padding: 24px 0;
+    background: transparent;
+    border: none; border-radius: 0;
+    box-shadow: none;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 24px;
+    border-top: none;
+  }
+  .stat .number {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-kpi);
+    font-weight: 700;
+    color: var(--color-text-dark);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+  .stat .label-text {
+    font-family: var(--font-body);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-tertiary);
+    line-height: 1.5;
+  }
+  .light .stat .number { color: var(--color-text-dark); }
+  .light .stat .label-text { color: var(--color-text-tertiary); }
+
+  /* --- List --- */
+  .list {
+    list-style: none; padding: 0;
+    display: flex; flex-direction: column;
+    gap: 16px; text-align: left;
+  }
+  .list li {
+    padding-left: 20px; position: relative;
+    font-size: var(--font-size-caption);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+  .list li::before {
+    content: "";
+    position: absolute; left: 0; top: 10px;
+    width: 6px; height: 6px; border-radius: 1px;
+    background: var(--color-accent);
+  }
+  .light .list li { color: var(--color-text-secondary); }
+
+  /* --- Two-Column Layout (テキスト + 何か) --- */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* --- Circle comparison (参考slide 2) --- */
+  .circle-compare {
+    display: flex; align-items: center; justify-content: center;
+    gap: 40px; width: 100%; flex: 1;
+  }
+  .circle {
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; gap: 12px;
+    padding: 40px;
+  }
+  .circle-before {
+    border: 2px solid var(--color-border);
+  }
+  .circle-after {
+    border: 2px solid var(--color-accent);
+  }
+  .circle h3 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-caption);
+    font-weight: 600;
+  }
+  .circle p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .light .circle-before { border-color: var(--color-text-tertiary); }
+  .light .circle-before h3 { color: var(--color-text-dark); }
+  .light .circle-before p { color: var(--color-text-tertiary); }
+  .light .circle-after h3 { color: var(--color-accent); }
+  .light .circle-after p { color: var(--color-text-dark); }
+  .circle-arrow {
+    font-size: 28px;
+    color: #ccc;
+    flex-shrink: 0;
+  }
+  .light .circle-arrow { color: #ccc; }
+
+  /* --- Accent text --- */
+  .accent { color: var(--color-accent); }
+  .bold { font-weight: 700; }
+  .muted-text { color: var(--color-text-tertiary); }
+  .light .muted-text { color: var(--color-text-tertiary); }
+
+  /* --- Icon --- */
+  .icon-label { font-size: 28px; margin-bottom: 4px; }
+
+  /* --- Spacing Rhythm (Codex指摘) --- */
+  .label { margin-bottom: 6px; }
+  .slide-content h2 { margin-bottom: 8px; }
+  .slide-content .desc { margin-top: 4px; }
+
+  /* --- Progress bar accent --- */
+  .progress-bar { background: var(--color-accent) !important; }
+
+  /* --- Nav override (dark) --- */
+  .nav button {
+    background: rgba(0,0,0,0.05);
+    border-color: rgba(0,0,0,0.15);
+    color: rgba(0,0,0,0.5);
+    border-radius: 4px;
+  }
+  .nav button:hover { background: rgba(0,0,0,0.1); color: #000; }
+  .slide-counter { color: rgba(0,0,0,0.3); font-family: var(--font-heading); }
+
+  /* --- Print --- */
+  @media print {
+    .slide::before { display: none; }
+    .card { border: 1px solid #ddd !important; background: #f8f8f8 !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- ========== 1. Cover — warm gradient ========== -->
+  <section class="slide slide-title">
+    <h1>漫画の力で、<br>届かなかった人に届ける</h1>
+    <p class="subtitle">企業向け漫画制作サービスのご案内</p>
+  </section>
+
+  <!-- ========== 2. 課題提起 — light bg, circle comparison ========== -->
+  <section class="slide slide-content light">
+    <h2>伝わらないコンテンツに、<br>コストをかけ続けていませんか？</h2>
+    <div class="body">
+      <div class="circle-compare">
+        <div class="circle circle-before">
+          <h3>従来のコンテンツ</h3>
+          <p>テキスト中心で読まれない<br>動画は高コスト<br>SNSは埋もれる</p>
+        </div>
+        <span class="circle-arrow">→</span>
+        <div class="circle circle-after">
+          <h3 class="accent">漫画コンテンツ</h3>
+          <p>目を引く・読まれる<br>コスト効率が良い<br>記憶に残る</p>
+        </div>
+      </div>
+    </div>
+    <span class="page-num">1</span>
+  </section>
+
+  <!-- ========== 3. Statement — dark ========== -->
+  <section class="slide slide-landing">
+    <p>漫画は「読まれるコンテンツ」の最適解。<br><br>テキストの<span class="accent-text">7倍</span>の情報伝達力、<br>動画の<span class="accent-text">1/3以下</span>のコスト。</p>
+    <span class="page-num" style="color:rgba(0,0,0,0.5);">2</span>
+  </section>
+
+  <!-- ========== 4. Section — warm gradient ========== -->
+  <section class="slide slide-section">
+    <span class="section-num">Service</span>
+    <h2>漫画制作で解決できる<br>4つの領域</h2>
+  </section>
+
+  <!-- ========== 5. 4領域 — dark, card grid ========== -->
+  <section class="slide slide-content">
+    <span class="label">Service Area</span>
+    <h2>企業の課題を漫画で解決する</h2>
+    <div class="body">
+      <div class="cols-2">
+        <div class="card">
+          <span class="tag">01</span>
+          <h3>広告漫画</h3>
+          <p>SNS広告・LP・バナーで離脱率を下げる。スクロールを止める力がある。</p>
+        </div>
+        <div class="card">
+          <span class="tag">02</span>
+          <h3>説明漫画</h3>
+          <p>複雑なサービス・製品をわかりやすく伝える。BtoB商材に最適。</p>
+        </div>
+        <div class="card">
+          <span class="tag">03</span>
+          <h3>採用漫画</h3>
+          <p>社風・仕事内容を求職者にリアルに届ける。応募率の向上に直結。</p>
+        </div>
+        <div class="card">
+          <span class="tag">04</span>
+          <h3>研修漫画</h3>
+          <p>マニュアル・社内教育をストーリーで定着させる。理解度が段違い。</p>
+        </div>
+      </div>
+    </div>
+    <span class="page-num" style="color:rgba(0,0,0,0.5);">3</span>
+  </section>
+
+  <!-- ========== 6. Section — warm gradient ========== -->
+  <section class="slide slide-section">
+    <span class="section-num">Production</span>
+    <h2>制作体制</h2>
+    <p class="section-sub">ワンストップで企画から納品まで</p>
+  </section>
+
+  <!-- ========== 7. 制作フロー — dark ========== -->
+  <section class="slide slide-content">
+    <span class="label">Workflow</span>
+    <h2>5ステップの制作フロー</h2>
+    <p class="desc">各工程でフィードバック可能。修正回数の制限なし。最短2週間で納品。</p>
+    <div class="body">
+      <div class="flow">
+        <div class="flow-step">
+          <span class="tag">01</span>
+          <h3>ヒアリング</h3>
+          <p>課題・目的を整理</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="tag">02</span>
+          <h3>シナリオ</h3>
+          <p>構成・セリフを設計</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="tag">03</span>
+          <h3>ネーム</h3>
+          <p>コマ割り・ラフ作成</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="tag">04</span>
+          <h3>作画</h3>
+          <p>線画・仕上げ</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="tag">05</span>
+          <h3>納品</h3>
+          <p>各フォーマット対応</p>
+        </div>
+      </div>
+    </div>
+    <span class="page-num" style="color:rgba(0,0,0,0.5);">4</span>
+  </section>
+
+  <!-- ========== 8. 強み — dark, 3 cards ========== -->
+  <section class="slide slide-content">
+    <span class="label">Strengths</span>
+    <h2>選ばれる3つの理由</h2>
+    <div class="body">
+      <div class="cols-3">
+        <div class="card card-accent-top">
+          <span class="tag">01</span>
+          <h3>企画から納品まで一気通貫</h3>
+          <p>シナリオライター × 漫画家のチーム体制。丸投げOK。</p>
+        </div>
+        <div class="card card-accent-top">
+          <span class="tag">02</span>
+          <h3>マーケティング視点の漫画</h3>
+          <p>「面白い」だけでなく「成果が出る」設計。CVR・読了率を意識。</p>
+        </div>
+        <div class="card card-accent-top">
+          <span class="tag">03</span>
+          <h3>柔軟なフォーマット対応</h3>
+          <p>SNS縦読み、LP埋め込み、冊子、動画変換。用途に合わせて最適化。</p>
+        </div>
+      </div>
+    </div>
+    <span class="page-num" style="color:rgba(0,0,0,0.5);">5</span>
+  </section>
+
+  <!-- ========== 9. Statement — dark ========== -->
+  <section class="slide slide-landing">
+    <p>「面白い漫画」ではなく<br><span class="accent-text">「成果が出る漫画」</span>を作る。</p>
+    <p class="sub">マーケティングの設計力 × 漫画の表現力</p>
+    <span class="page-num" style="color:rgba(0,0,0,0.5);">6</span>
+  </section>
+
+  <!-- ========== 10. Section — warm gradient ========== -->
+  <section class="slide slide-section">
+    <span class="section-num">Results</span>
+    <h2>導入企業の成果</h2>
+  </section>
+
+  <!-- ========== 11. 実績 KPI — light bg ========== -->
+  <section class="slide slide-content light">
+    <span class="label">Performance</span>
+    <h2>漫画コンテンツ導入後の実績</h2>
+    <div class="body">
+      <div class="cols-3">
+        <div class="stat">
+          <span class="number">2.3x</span>
+          <span class="label-text">CVR改善率<br>LP漫画導入後の平均</span>
+        </div>
+        <div class="stat">
+          <span class="number">85%</span>
+          <span class="label-text">読了率<br>テキスト記事比で3倍以上</span>
+        </div>
+        <div class="stat">
+          <span class="number">300+</span>
+          <span class="label-text">累計制作実績<br>企業数</span>
+        </div>
+      </div>
+      <p class="muted-text" style="font-size:13px;">※ 数値はサンプルです。実績に応じて差し替えてください。</p>
+    </div>
+    <span class="page-num">7</span>
+  </section>
+
+  <!-- ========== 12. 料金 — dark, 3 cards ========== -->
+  <section class="slide slide-content">
+    <span class="label">Pricing</span>
+    <h2>ニーズに合わせた3プラン</h2>
+    <div class="body">
+      <div class="cols-3">
+        <div class="card">
+          <span class="tag">LIGHT</span>
+          <h3>ライトプラン</h3>
+          <p>1ページ漫画<br>SNS・バナー向け</p>
+          <p style="font-family:var(--font-heading);font-size:clamp(2rem,4vw,2.5rem);font-weight:700;color:#0D1418;margin-top:8px;">¥XX万〜</p>
+          <p style="font-size:12px;color:rgba(0,0,0,0.4);">まずは試したい方に</p>
+        </div>
+        <div class="card card-accent-top">
+          <span class="tag">STANDARD</span>
+          <h3>スタンダード</h3>
+          <p>4〜8ページ<br>LP・採用ページ向け</p>
+          <p style="font-family:var(--font-heading);font-size:clamp(2rem,4vw,2.5rem);font-weight:700;color:#0D1418;margin-top:8px;">¥XX万〜</p>
+          <p style="font-size:12px;color:rgba(0,0,0,0.4);">しっかり伝えたい方に</p>
+        </div>
+        <div class="card">
+          <span class="tag">PREMIUM</span>
+          <h3>プレミアム</h3>
+          <p>長編・連載<br>ブランディング・研修向け</p>
+          <p style="font-family:var(--font-heading);font-size:clamp(2rem,4vw,2.5rem);font-weight:700;color:#0D1418;margin-top:8px;">¥XX万〜</p>
+          <p style="font-size:12px;color:rgba(0,0,0,0.4);">本格的に活用したい方に</p>
+        </div>
+      </div>
+    </div>
+    <span class="page-num" style="color:rgba(0,0,0,0.5);">8</span>
+  </section>
+
+  <!-- ========== 13. Statement — dark ========== -->
+  <section class="slide slide-landing">
+    <p>「伝わらない」を<br>「伝わる」に変える。<br><br>まずは<span class="accent-text">無料相談</span>から。</p>
+    <span class="page-num" style="color:rgba(0,0,0,0.5);">9</span>
+  </section>
+
+  <!-- ========== 14. Thank You — warm gradient ========== -->
+  <section class="slide slide-end">
+    <h2>Thank You.</h2>
+    <p class="contact">お問い合わせ: xxx@example.com</p>
+  </section>
+
+</div>
+
+<!-- Navigation UI -->
+<div class="progress-bar"></div>
+<nav class="nav">
+  <button class="nav-prev" aria-label="前へ">←</button>
+  <span class="slide-counter">1 / 14</span>
+  <button class="nav-next" aria-label="次へ">→</button>
+  <button class="nav-fs" aria-label="フルスクリーン">⛶</button>
+  <button class="nav-pdf" aria-label="PDF">PDF</button>
+</nav>
+
+<script src="../../engine/slide.js"></script>
+</body>
+</html>
